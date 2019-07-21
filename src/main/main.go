@@ -1,10 +1,10 @@
 package main
 
 import (
-	"gin"
+	"url"
 )
 
 // https://javascript.ctolib.com/article/compares/93347
 func main() {
-	gin.Main()
+	url.Main()
 }

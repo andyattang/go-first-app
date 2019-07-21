@@ -20,6 +20,8 @@ type User struct {
 
 func Main() {
 	var app = iris.New()
+	app.Logger().SetLevel("debug")
+
 	orm, err := xorm.NewEngine("sqlite3", "./test.db")
 	if err != nil {
 		app.Logger().Fatalf("failed to initalized sqlite3: %v", err)
@@ -39,7 +41,9 @@ func Main() {
 	})
 
 	app.Get("/get/{id:int64}", func(ctx iris.Context) {
-		user := User{ID: ctx.Params().GetInt64Default("id", 0)}
+		var id = ctx.Params().GetInt64Default("id", 0)
+		app.Logger().Infof("Get id:%v", id)
+		user := User{ID: id}
 		if ok, _ := orm.Get(&user); ok {
 			ctx.Writef("user found: %#v", user)
 		} else {

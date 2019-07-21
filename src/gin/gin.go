@@ -4,8 +4,9 @@ import (
 	"log"
 	"strconv"
 	"time"
-	
-    "net/http"
+
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
 	_ "github.com/mattn/go-sqlite3"
@@ -21,6 +22,7 @@ type User struct {
 	UpdatedAt time.Time
 }
 
+//Main is an entry
 func Main() {
 	// inital the app
 	var app = gin.New()
@@ -35,6 +37,7 @@ func Main() {
 	if err != nil {
 		log.Fatalf("orm failed to initalized User table: %v", err)
 	}
+
 	app.GET("/insert", func(ctx *gin.Context) {
 		user := &User{Username: "test user", Password: "123456", CreatedAt: time.Now(), UpdatedAt: time.Now()}
 		_, err := orm.Insert(user)
