@@ -34,6 +34,6 @@ func Main() {
 	a := admin(say)
 	fmt.Println(a.email, a.name)
 
-	u := user(say)
-	fmt.Println(u.email, u.name)
+	// u := user(say)
+	// fmt.Println(u.email, u.name)
 }
