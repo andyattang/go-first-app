@@ -22,7 +22,6 @@ type User struct {
 	UpdatedAt time.Time
 }
 
-//Main is an entry
 func Main() {
 	// inital the app
 	var app = gin.New()
@@ -37,7 +36,6 @@ func Main() {
 	if err != nil {
 		log.Fatalf("orm failed to initalized User table: %v", err)
 	}
-
 	app.GET("/insert", func(ctx *gin.Context) {
 		user := &User{Username: "test user", Password: "123456", CreatedAt: time.Now(), UpdatedAt: time.Now()}
 		_, err := orm.Insert(user)
@@ -53,14 +51,14 @@ func Main() {
 		log.Printf("Get user ID:%v", idStr)
 		id, err := strconv.ParseInt(idStr, 10, 64)
 		if err != nil {
-			ctx.String(500, "invaild user id: %v", idStr)
+			ctx.String(http.StatusInternalServerError, "invaild user id: %v", idStr)
 			return
 		}
 		user := User{ID: id}
 		if ok, _ := orm.Get(&user); ok {
-			ctx.String(200, "user found: %#v", user)
+			ctx.String(http.StatusOK, "user found: %#v", user)
 		} else {
-			ctx.String(500, "user not found, id: %v", user.ID)
+			ctx.String(http.StatusInternalServerError, "user not found, id: %v", user.ID)
 		}
 	})
 
