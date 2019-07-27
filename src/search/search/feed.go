@@ -8,9 +8,10 @@ import (
 const dataFile = "src/search/data/data.json"
 
 type Feed struct {
-	Name string `json:"site"`
-	URI  string `json:"link"`
-	Type string `json:"type"`
+	Name   string `json:"site"`
+	URI    string `json:"link"`
+	Type   string `json:"type"`
+	Search string `json:"search"`
 }
 
 func RetrieveFeeds() ([]*Feed, error) {

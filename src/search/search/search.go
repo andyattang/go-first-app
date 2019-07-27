@@ -7,7 +7,7 @@ import (
 
 var matchers = make(map[string]Matcher)
 
-func Run(searchTerm string) {
+func Run() {
 	feeds, err := RetrieveFeeds()
 	if err != nil {
 		log.Fatal(err)
@@ -26,7 +26,7 @@ func Run(searchTerm string) {
 		}
 
 		go func(matcher Matcher, feed *Feed) {
-			Match(matcher, feed, searchTerm, results)
+			Match(matcher, feed, results)
 			waitGroup.Done()
 		}(matcher, feed)
 	}
@@ -45,6 +45,6 @@ func Register(feedType string, matcher Matcher) {
 		log.Fatalln(feedType, "Matcher already registered")
 	}
 
-	log.Println("Register", feedType, "matcher")
+	log.Println("Register ", feedType, " matcher")
 	matchers[feedType] = matcher
 }

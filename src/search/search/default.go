@@ -17,7 +17,8 @@ func (m defaultMatcher) Search(feed *Feed, searchTerm string) ([]*Result, error)
 	return nil, nil
 }
 
-func Match(matcher Matcher, feed *Feed, searchTerm string, results chan<- *Result) {
+func Match(matcher Matcher, feed *Feed, results chan<- *Result) {
+	var searchTerm = feed.Search
 	searchResults, err := matcher.Search(feed, searchTerm)
 	if err != nil {
 		log.Println(err)
@@ -30,6 +31,6 @@ func Match(matcher Matcher, feed *Feed, searchTerm string, results chan<- *Resul
 
 func Display(results chan *Result) {
 	for result := range results {
-		fmt.Printf("%s:\n%s\n\n", result.Field, result.Content)
+		fmt.Printf("URL:%s\n%s:%s\n\n", result.Url, result.Field, result.Search)
 	}
 }
