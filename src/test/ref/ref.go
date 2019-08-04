@@ -6,12 +6,12 @@ import (
 )
 
 type anything interface{}
-type u struct {
+type u struct{
 	Name string  `f:"xxx"`
-	Pwd  []int64 `don't print out`
+	Pwd  []int64 `x:"don't print out"`
 }
 
-func (u1 *u) Hello(msg string) string {
+func (u1 *u) Hello(msg string) string{
 	return fmt.Sprintln("u.Name:", u1.Name, " ", msg)
 }
 
@@ -46,7 +46,7 @@ func Main() {
 				fmt.Printf("%v(%v,tag`%v`)=%v\n", f.Name, f.Type, f.Tag, val.Interface())
 			}
 
-			// get all
+			// get all the methods that belong to u, and call them
 			fmt.Println("number of method:", v1.NumMethod())
 			for i := 0; i < v1.NumMethod(); i++ {
 				m := t1.Method(i)
