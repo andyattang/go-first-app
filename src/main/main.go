@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	"os"
-	"test/ch"
+	"test/ref"
 )
 
 func init() {
@@ -12,5 +12,5 @@ func init() {
 
 // https://javascript.ctolib.com/article/compares/93347
 func main() {
-	ch.Main()
+	ref.Main()
 }
